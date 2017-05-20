@@ -3,7 +3,6 @@
 
 (require compiler/find-exe
          racket/runtime-path
-         frog
          "files.rkt")
 
 (define-runtime-path project-root-dir ".")
