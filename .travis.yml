@@ -15,7 +15,7 @@ before_install:
 - "./install-racket.sh"
 - export PATH="${RACKET_DIR}/bin:${PATH}"
 install:
-- make all && cd $TRAVIS_BUILD_DIR
+- racket make.rkt && cd $TRAVIS_BUILD_DIR
 script:
 - echo 0
 deploy:
