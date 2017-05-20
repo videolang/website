@@ -1,9 +1,10 @@
 #lang scribble/html
 
-@(require scribble/html
+@(require scribble/html/lang
           (for-syntax syntax/parse))
 
-@(provide (all-from-out scribble/html))
+@(provide (all-from-out scribble/html/lang)
+          page)
 
 @(define (header . v)
    @head{

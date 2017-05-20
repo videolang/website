@@ -1,7 +1,10 @@
 #lang s-exp syntax/module-reader
 "templates.rkt"
 
-#:read read-inside
-#:read-syntax read-syntax-inside
+#:read scribble:read-inside
+#:read-syntax scribble:read-syntax-inside
+#:whole-body-readers? #t
+#:info        (scribble-base-reader-info)
 
-(require scribble/reader)
+(require (prefix-in scribble: scribble/reader)
+         (only-in scribble/base/reader scribble-base-reader-info))
