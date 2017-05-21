@@ -11,6 +11,9 @@
   (define file-table
     '(
       ("Home"              . "index.scrbl")
+      ("Download"          . "download.scrbl")
+      ("Documentation"     . "documentation.scrbl")
+      ("Community"         . "community.scrbl")
       )))
 (require 'files-mod
          (for-syntax 'files-mod))
