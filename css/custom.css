@@ -1,0 +1,43 @@
+.navbar-inner,
+.navbar-header {
+    min-height: 70px !important;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.navbar-nav > li > a {
+    line-height: 40px;
+    font-size: 20px;
+}
+
+.splash > p {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 60%;
+}
+
+.btn-oval {
+    width: 70%;
+    height: 100px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 60px;
+    line-height: 1.42;
+    border-radius: 50px;
+    color: white;
+    background-color: crimson;
+}
+
+.blurb {
+    text-align: center;
+}
+
+.footer-color {
+    background-color: #F8F8F8;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
