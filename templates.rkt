@@ -3,6 +3,7 @@
 @(require racket/dict
           scribble/html/lang
           (for-syntax syntax/parse)
+          "logo/logo.rkt"
           "files.rkt")
 
 @(provide (all-from-out scribble/html/lang)
@@ -33,7 +34,7 @@
              @span[class: "icon-bar"]
              @span[class: "icon-bar"]}
            @a[class: "navbar-brand" href: (dict-ref html-file-table "Home")]{
-             @img[src: "logo/small-nav.png" alt: "Video logo" height: "51" width: "75"]}}
+            @img[src: logo alt: "Video logo" height: "51" width: "75"]}}
          @div[id: "navbar" class: "navbar-collapse collapse"]{
            @ul[class: "nav navbar-nav pull-right"]{
              @(for/list ([title-pair (in-list html-file-table)])

@@ -3,6 +3,7 @@
 
 (require compiler/find-exe
          racket/runtime-path
+         scribble/html/resource
          "files.rkt")
 
 (define-runtime-path project-root-dir ".")
@@ -12,6 +13,8 @@
     (with-output-to-file (path-replace-suffix f ".html")
       #:exists 'replace
       (lambda ()
-        (dynamic-require f 0)))))
+        (dynamic-require f 0))))
+  (parameterize ([current-directory project-root-dir])
+    (render-all)))
 
 (build)
