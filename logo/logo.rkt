@@ -16,7 +16,7 @@
    limitations under the License.
 |#
 
-(provide logo)
+(provide (all-defined-out))
 (require racket/class
          racket/draw
          racket/path
@@ -25,54 +25,89 @@
          images/icons/style
          mrlib/switchable-button
          racket/list
-         scribble/html/resource)
+         scribble/html/resource
+         pict
+         pict/shadow)
 
-(define height 100)
-(define width (* height 2))
-(define film-ratio (/ height 3))
-(define film-offset (/ width 15))
-(define body-height (+ height film-ratio))
-(define lens-dim 2/3)
-(define camera (make-object bitmap% width height #f #t))
+(define (mk-logo height
+                 #:square-pict? [square-pict? #f]
+                 #:text? [text? #f])
+  (define width (* height 2))
+  (define film-ratio (/ height 3))
+  (define film-offset (/ width 15))
+  (define body-height (+ height film-ratio))
+  (define lens-dim 2/3)
+  (define camera (make-object bitmap% width height #f #t))
 
-(let ()
-  (define dc (make-object bitmap-dc% camera))
-  (send dc set-pen (new pen% [width 0] [color (icon-color->outline-color run-icon-color)]))
-  (send dc set-brush (new brush% [color run-icon-color]))
-
-  (define path (new dc-path%))
-  (send path move-to 0             0)
-  (send path line-to 0             height)
-  (send path line-to (* width lens-dim) height)
-  (send path line-to (* width lens-dim) (* height 3/4))
-  (send path line-to width         (* height 9/10))
-  (send path line-to width         (* height 1/10))
-  (send path line-to (* width lens-dim) (* height 1/4))
-  (send path line-to (* width lens-dim) 0)
-  (send path line-to 0             0)
-  (send dc draw-path path))
-
-(define camera-body (make-object bitmap% width (ceiling body-height) #f #t))
-
-(let ()
-  (define dc (make-object bitmap-dc% camera-body))
-  (send dc draw-bitmap camera 0 film-ratio)
-  (send dc set-brush (new brush% [color "blue"]))
-  (send dc draw-arc film-offset 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi)
-  (send dc set-brush (new brush% [color "red"]))
-  (send dc draw-arc (* 4 film-offset) 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi))
-
-(define plain-logo (make-object bitmap% width width #f #t))
-(let ()
-  (define dc (make-object bitmap-dc% plain-logo))
-  (send dc draw-bitmap camera-body 0 (/ (- width body-height) 2))
-  (void))
-
-(define logo-picture
-  (bitmap-render-icon camera-body))
+  (let ()
+    (define dc (make-object bitmap-dc% camera))
+    (send dc set-pen (new pen% [width 0] [color (icon-color->outline-color run-icon-color)]))
+    (send dc set-brush (new brush% [color run-icon-color]))
+    
+    (define path (new dc-path%))
+    (send path move-to 0             0)
+    (send path line-to 0             height)
+    (send path line-to (* width lens-dim) height)
+    (send path line-to (* width lens-dim) (* height 3/4))
+    (send path line-to width         (* height 9/10))
+    (send path line-to width         (* height 1/10))
+    (send path line-to (* width lens-dim) (* height 1/4))
+    (send path line-to (* width lens-dim) 0)
+    (send path line-to 0             0)
+    (send dc draw-path path))
+  
+  (define camera-body (make-object bitmap% width (ceiling body-height) #f #t))
+  
+  (let ()
+    (define dc (make-object bitmap-dc% camera-body))
+    (send dc draw-bitmap camera 0 film-ratio)
+    (send dc set-brush (new brush% [color "blue"]))
+    (send dc draw-arc film-offset 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi)
+    (send dc set-brush (new brush% [color "red"]))
+    (send dc draw-arc (* 4 film-offset) 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi))
+  
+  (define plain-logo (make-object bitmap% width width #f #t))
+  (let ()
+    (define dc (make-object bitmap-dc% plain-logo))
+    (send dc draw-bitmap camera-body 0 (/ (- width body-height) 2))
+    (void))
+  
+  (define logo-picture
+    (bitmap-render-icon (if square-pict?
+                            plain-logo
+                            camera-body)))
+  
+  (define worded-logo
+    (pict->bitmap
+     (cc-superimpose
+      (bitmap logo-picture)
+      (inset
+       (shadow 
+        (text "Video" "Helvetica" (/ height 2))
+        (/ height 10) (/ height 50)
+        #:color (make-object color% 255 255 255 0.5)
+        #:shadow-color "black")
+       0 (/ height 5) (/ height 5) 0))))
+  (if text?
+      worded-logo
+      logo-picture))
 
 (define logo
   (resource
    "logo.png"
    (λ (p)
-     (send logo-picture save-file p 'png 100))))
+     (send (mk-logo 100) save-file p 'png 75))))
+
+(define word-logo
+  (resource
+   "wlogo.png"
+   (λ (p)
+     (send (mk-logo 500 #:text? #t) save-file p 'png 75))))
+
+#|
+(define big-logo
+  (resource
+   "blogo.png"
+   (λ (p)
+     (send (mk-logo 1000) save-file p 'png 100))))
+|#
