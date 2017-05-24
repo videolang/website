@@ -102,7 +102,7 @@
   (resource
    "wlogo.png"
    (λ (p)
-     (send (mk-logo 500 #:text? #t) save-file p 'png 75))))
+     (send (mk-logo 200 #:text? #t) save-file p 'png 75))))
 
 #|
 (define big-logo
