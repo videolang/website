@@ -19,7 +19,7 @@
      @title[v]{ - Video Language}})
 
 @(define (navbar . current-page)
-   @element/not-empty["nav" class: "navbar navbar-inverse"]{
+   @element/not-empty["nav" class: "navbar navbar-inverse navbar-fixed-top"]{
      @div[class: "navbar-inner"]{
        @div[class: "container"]{
          @div[class: "navbar-header"]{
