@@ -41,6 +41,9 @@
                (cond
                  [(equal? (car title-pair) (car current-page))
                   @li[role: "presentation" class: "active"]{@a[href: "#" (car title-pair)]}]
+                 [(equal? (car title-pair) "Download")
+                  @li[role: "presentation"]{
+                        @a[href: "https://github.com/videolang/video"]{Download}}]
                  [(equal? (car title-pair) "Documentation")
                   @li[role: "presentation"]{
                         @a[href: "http://docs.racket-lang.org/video/index.html"]{Documentation}}]
