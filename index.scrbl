@@ -8,7 +8,10 @@
    @div[class: "splash"]{
     @center{@img[src: word-logo alt: "Video" height: 200 width: 325]}
     @h2{A Language for Making Movies}
-    @p{@b{Video} is a language for making movies.}
+    @p{@b{Video} is a language for making movies. It has all of
+     the power of the Racket ecosystem. Video also comes with
+     extensions for DrRacket to transform it into a non-linear
+     video editor.}
     @center{
      @a[class: "btn-oval btn btn-default btn-lg"
         href: "http://github.com/videolang/video"
