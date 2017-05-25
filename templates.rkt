@@ -38,9 +38,13 @@
          @div[id: "navbar" class: "navbar-collapse collapse"]{
            @ul[class: "nav navbar-nav pull-right"]{
              @(for/list ([title-pair (in-list html-file-table)])
-               (if (equal? (car title-pair) (car current-page))
-                 @li[role: "presentation" class: "active"]{@a[href: "#" (car title-pair)]}
-                 @li[role: "presentation"]{@a[href: (cdr title-pair) (car title-pair)]}))}}}}})
+               (cond
+                 [(equal? (car title-pair) (car current-page))
+                  @li[role: "presentation" class: "active"]{@a[href: "#" (car title-pair)]}]
+                 [(equal? (car title-pair) "Documentation")
+                  @li[role: "presentation"]{
+                        @a[href: "http://docs.racket-lang.org/video/index.html"]{Documentation}}]
+                 [else @li[role: "presentation"]{@a[href: (cdr title-pair) (car title-pair)]}])))}}}}})
 
 @(define (footer . v)
    (list
