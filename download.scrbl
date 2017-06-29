@@ -26,7 +26,7 @@
            class: "btn btn-primary btn-lg btn-block"]{
     Option A: Install in DrRacket (Recommended)}
    @div[id: "step2a" class: "collapse"]{
-    @h3{Coming Soon...}}}
+    @h3{Coming Soon... Use Option B for now.}}}
   @div[class: "row"]{
    @button[data-toggle: "collapse"
            data-target: "#step2b"
