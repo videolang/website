@@ -11,7 +11,6 @@
   @h2{Publications}
   @p{This is a list of Video related publications.}
   @ul{
-   @li{@b{Super 8 Languages for Making Movies.} Leif Andersen,
-    Stephen Chang, Matthias Felleisen. ICFP 2017
-    (@a[href: "pub/icfp2017.pdf"]{PDF})}
- }}}
+   @li{@b{Super 8 Languages for Making Movies (A Functional
+     Pearl).} Leif Andersen, Stephen Chang, Matthias Felleisen.
+    ICFP 2017 (@a[href: "pub/icfp2017.pdf"]{PDF})}}}}
