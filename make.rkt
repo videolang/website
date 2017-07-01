@@ -15,6 +15,8 @@
       (lambda ()
         (dynamic-require f 0))))
   (parameterize ([current-directory project-root-dir])
-    (render-all)))
+    (render-all))
+  (parameterize ([current-directory (build-path project-root-dir "blog")])
+    (system* (find-exe) "-l" "raco" "frog" "-b")))
 
 (build)
