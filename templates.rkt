@@ -33,11 +33,11 @@
              @span[class: "icon-bar"]
              @span[class: "icon-bar"]
              @span[class: "icon-bar"]}
-           @a[class: "navbar-brand" href: (dict-ref html-file-table "Home")]{
+           @a[class: "navbar-brand" href: (dict-ref html-navbar-file-table "Home")]{
             @img[src: logo alt: "Video logo" height: "51" width: "75"]}}
          @div[id: "navbar" class: "navbar-collapse collapse"]{
            @ul[class: "nav navbar-nav pull-right"]{
-             @(for/list ([title-pair (in-list html-file-table)])
+             @(for/list ([title-pair (in-list html-navbar-file-table)])
                (cond
                  [(equal? (car title-pair) (car current-page))
                   @li[role: "presentation" class: "active"]{@a[href: "#" (car title-pair)]}]
