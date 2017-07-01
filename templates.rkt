@@ -9,14 +9,15 @@
 @(provide (all-from-out scribble/html/lang)
           page)
 
-@(define (header . v)
+@(define (header #:rest [rest '()] . v)
    @head{
      @meta[charset: "utf-8"]
      @meta[http-equiv: "X-UA-Compatible" content: "IE=edge"]
      @meta[name: "viewport" 'content: "width=device-width, initial-scale=1"]
      @link[href: "css/bootstrap.min.css" rel: "stylesheet"]
      @link[href: "css/custom.css" rel: "stylesheet"]
-     @title[v]{ - Video Language}})
+     @title[v]{ - Video Language}
+     @rest})
 
 @(define (navbar . current-page)
    @element/not-empty["nav" class: "navbar navbar-inverse navbar-fixed-top"]{
@@ -55,10 +56,12 @@
     @script[src: "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"]
     @script[src: "js/bootstrap.min.js"]))
 
-@(define (page #:title title . content)
+@(define (page #:title title
+               #:header-rest [header-rest '()]
+               . content)
    (list @doctype{html}
          @html[lang: "en"]{
-           @header{@title}
+           @header[#:rest header-rest]{@title}
            @body[id: "pn-top"]{
              @navbar[title]
              @content

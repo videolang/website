@@ -1,0 +1,11 @@
+#lang reader "../../website.rkt"
+
+@page[#:title "@|title|"
+      #:header-rest (list @link[rel: "alternate" type: "application/atom+xml"
+                                href: "@|atom-feed-uri|" title: "Atom Feed"]
+                          @link[rel: "alternate" type: "application/rss+xml"
+                                href: "@|rss-feed-uri|" title: "RSS Feed"])]{
+ @div[class: "container"]{
+  @div[class: "row"]{
+   @div[id: "content" class: "col-md-12"]{
+    @"@"|content|}}}}
