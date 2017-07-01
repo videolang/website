@@ -17,6 +17,7 @@
   (parameterize ([current-directory project-root-dir])
     (render-all))
   (parameterize ([current-directory (build-path project-root-dir "blog")])
+    (system* (find-exe) "-l" "raco" "pkg" "install" "--auto" "--skip-installed" "frog")
     (system* (find-exe) "-l" "raco" "frog" "-b")))
 
 (build)
