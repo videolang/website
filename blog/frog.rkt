@@ -9,6 +9,7 @@
   (current-title "Video Blog")
   (current-author "The Video Language Team")
   (current-permalink "/{year}/{month}/{day}/{title}/index.html")
+  (current-index-full? #f)
   (current-posts-per-page 10)
   (current-posts-index-uri "/index.html")
   (current-source-dir "_src")
