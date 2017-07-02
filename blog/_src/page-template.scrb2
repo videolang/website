@@ -6,6 +6,9 @@
                                 href: "@|atom-feed-uri|" title: "Atom Feed"]
                           @link[rel: "alternate" type: "application/rss+xml"
                                 href: "@|rss-feed-uri|" title: "RSS Feed"])]{
+ @"@"
+ @div[class: "jumbotron"]{
+  @div[class: "container"]{@h1{Video Blog}}}
  @div[class: "container"]{
   @div[class: "row"]{
    @div[id: "content" class: "col-md-12"]{
