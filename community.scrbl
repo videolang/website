@@ -14,7 +14,7 @@
     @p{Download the source code for Video and other related
      projects.}}
    @div[class: "col-md-4 blurb"]{
-    @h2{Blog}
+    @h2{@a[href: "/blog"]{Blog}}
     @p{Stay informed on the latest Video news. (Coming Soon)}}}
   @h2{Showcase}
   @p{This is a list of videos that used Videos for part or
