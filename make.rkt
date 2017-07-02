@@ -13,8 +13,7 @@
     (with-output-to-file (path-replace-suffix f ".html")
       #:exists 'replace
       (lambda ()
-        (parameterize ([url-roots '(("" "/"))])
-          (dynamic-require f 0)))))
+        (dynamic-require f 0))))
   (parameterize ([current-directory project-root-dir])
     (render-all))
   (parameterize ([current-directory (build-path project-root-dir "blog")])

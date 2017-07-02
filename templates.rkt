@@ -6,8 +6,15 @@
           "logo/logo.rkt"
           "files.rkt")
 
-@(provide (all-from-out scribble/html/lang)
+@(provide (except-out (all-from-out scribble/html/lang)
+                      #%module-begin)
+          (rename-out [~module-begin #%module-begin])
           page)
+
+@(define-syntax-rule (~module-begin body ...)
+   (#%module-begin
+    (url-roots '(("" "/" abs)))
+    body ...))
 
 @(define (header #:rest [rest '()] . v)
    @head{
@@ -36,7 +43,7 @@
              @span[class: "icon-bar"]
              @span[class: "icon-bar"]
              @span[class: "icon-bar"]}
-           @a[class: "navbar-brand" href: (dict-ref html-navbar-file-table "Home")]{
+           @a[class: "navbar-brand" href: (build-path "/" (dict-ref html-navbar-file-table "Home"))]{
             @img[src: logo alt: "Video logo" height: "51" width: "75"]}}
          @div[id: "navbar" class: "navbar-collapse collapse"]{
            @ul[class: "nav navbar-nav pull-right"]{
@@ -44,7 +51,7 @@
                (cond
                  [(equal? (car title-pair) (car current-page))
                   @li[role: "presentation" class: "active"]{@a[href: "#" (car title-pair)]}]
-                 [else @li[role: "presentation"]{@a[href: (cdr title-pair) (car title-pair)]}]))}}}}})
+                 [else @li[role: "presentation"]{@a[href: (build-path "/" (cdr title-pair)) (car title-pair)]}]))}}}}})
 
 @(define (footer . v)
    (list
