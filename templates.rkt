@@ -44,7 +44,7 @@
                (cond
                  [(equal? (car title-pair) (car current-page))
                   @li[role: "presentation" class: "active"]{@a[href: "#" (car title-pair)]}]
-                 [else @li[role: "presentation"]{@a[href: (cdr title-pair) (car title-pair)]}])))}}}}})
+                 [else @li[role: "presentation"]{@a[href: (cdr title-pair) (car title-pair)]}]))}}}}})
 
 @(define (footer . v)
    (list
