@@ -20,6 +20,7 @@
 (require racket/class
          racket/draw
          racket/path
+         pict/color
          racket/gui/base
          racket/math
          images/icons/style
@@ -32,6 +33,9 @@
 (define (mk-logo height
                  #:square-pict? [square-pict? #f]
                  #:text? [text? #f])
+  (define green (make-object color% #x55 #xd9 #x21))
+  (define blue (make-object color% #x02 #x7e #xee))
+  (define red (make-object color% #xf5 #x25 #x00)); #xe0 #x22 #x00))
   (define width (* height 2))
   (define film-ratio (/ height 3))
   (define film-offset (/ width 15))
@@ -41,8 +45,8 @@
 
   (let ()
     (define dc (make-object bitmap-dc% camera))
-    (send dc set-pen (new pen% [width 0] [color (icon-color->outline-color run-icon-color)]))
-    (send dc set-brush (new brush% [color run-icon-color]))
+    (send dc set-pen (new pen% [width 0] [color (icon-color->outline-color green)]))
+    (send dc set-brush (new brush% [color green]))
     
     (define path (new dc-path%))
     (send path move-to 0             0)
@@ -60,11 +64,13 @@
   
   (let ()
     (define dc (make-object bitmap-dc% camera-body))
-    (send dc draw-bitmap camera 0 film-ratio)
-    (send dc set-brush (new brush% [color "blue"]))
+    (send dc set-brush (new brush% [color red]))
+    (send dc draw-arc (* 4 film-offset) 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi)
+    (send dc set-brush (new brush% [color blue]))
     (send dc draw-arc film-offset 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi)
-    (send dc set-brush (new brush% [color "red"]))
-    (send dc draw-arc (* 4 film-offset) 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi))
+    (send dc set-brush (new brush% [color red]))
+    (send dc draw-arc (* 4 film-offset) 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi)
+    (send dc draw-bitmap camera 0 film-ratio))
   
   (define plain-logo (make-object bitmap% width width #f #t))
   (let ()
@@ -73,7 +79,7 @@
     (void))
   
   (define logo-picture
-    (bitmap-render-icon (if square-pict?
+    (values #;bitmap-render-icon (if square-pict?
                             plain-logo
                             camera-body)))
   
@@ -83,11 +89,11 @@
       (bitmap logo-picture)
       (inset
        (shadow 
-        (text "Video" "Helvetica" (/ height 2))
-        (/ height 10) (/ height 50)
+        (text "λ" "Helvetica" (exact-round (* height 1.1)))
+        0 0 ;(/ height 10) (/ height 50)
         #:color (make-object color% 255 255 255 0.5)
-        #:shadow-color "black")
-       0 (/ height 5) (/ height 5) 0))))
+        #:shadow-color (make-object color% 230 255 255))
+       0 (* height 0.55) (* height 0.7) 0))))
   (if text?
       worded-logo
       logo-picture))
@@ -104,10 +110,9 @@
    (λ (p)
      (send (mk-logo 200 #:text? #t) save-file p 'png 75))))
 
-#|
+#;
 (define big-logo
   (resource
    "blogo.png"
    (λ (p)
-     (send (mk-logo 1000) save-file p 'png 100))))
-|#
+     (send (mk-logo 1000 #:text? #t) save-file p 'png 100))))
