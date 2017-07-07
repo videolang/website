@@ -1,7 +1,6 @@
 language: generic
 
 sudo: true
-dist: trusty
 
 cache:
   directories:
