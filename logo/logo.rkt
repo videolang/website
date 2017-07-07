@@ -50,7 +50,7 @@
                              "Linux Libertine Display 0"))
       (define intersect (set-intersect (get-face-list) attempts))
       (when (set-empty? intersect)
-        (error 'mk-logo "No fount ~s installed" attempts))
+        (error 'mk-logo "No fount ~s installed, currently installed: ~s" attempts (get-face-list)))
       (car intersect)))
   (define camera-body
     (dc (λ (dc dx dy)
