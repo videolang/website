@@ -10,10 +10,11 @@
 
 (define (build)
   (for ([f (in-list files)])
-    (with-output-to-file (path-replace-suffix f ".html")
-      #:exists 'replace
-      (lambda ()
-        (dynamic-require f 0))))
+    (unless (equal? (path-get-extension f) #".html")
+      (with-output-to-file (path-replace-suffix f ".html")
+        #:exists 'replace
+        (lambda ()
+          (dynamic-require f 0)))))
   (parameterize ([current-directory project-root-dir])
     (render-all))
   (parameterize ([current-directory (build-path project-root-dir "blog")])

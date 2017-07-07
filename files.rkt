@@ -14,6 +14,7 @@
       ("Download"          . "download.scrbl")
       ("Documentation"     . "documentation.scrbl")
       ("Community"         . "community.scrbl")
+      ("Blog"              . "blog/index.html")
       )))
 (require 'files-mod
          (for-syntax 'files-mod))
