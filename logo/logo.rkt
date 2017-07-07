@@ -135,7 +135,7 @@
       (pin-over
        (bitmap plain-logo)
        (* body-height 0.4)
-       (* body-height 0.4)
+       (* body-height 0.3) ;(* body-height 0.4)
        (shadow
         (scale (text "λ" "Helvetica" 1) (* body-height 10/9))
         (/ body-height 10) (/ body-height 50)
