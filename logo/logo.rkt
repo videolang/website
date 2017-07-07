@@ -22,6 +22,7 @@
          racket/path
          racket/gui/base
          racket/math
+         racket/set
          images/icons/style
          mrlib/switchable-button
          racket/list
@@ -43,6 +44,9 @@
   (define film-ratio (* body-height 2/3))
   (define width body-width)
   (define lens-dim 2/3)
+  (define font "Linux Libertine Display")
+  (unless (set-member? (get-face-list) font)
+    (error 'mk-logo "Font: ~a not installed" font))
   (define camera-body
     (dc (λ (dc dx dy)
           (define old-brush (send dc get-brush))
@@ -108,16 +112,16 @@
   
   (define pre-paren-image
     (hc-append
-     (scale (text "(" "Helvetica" 1) (* 3/4 height))
-     (scale (text "(" "Helvetica" 1) (* 2/4 height))
-     (scale (text "(" "Helvetica" 1) (* 1/4 height))
-     (ghost (scale (text "(" "Helvetica" 1) (* 1/4 height)))))
+     (scale (text "(" font 1) (* 3/4 height))
+     (scale (text "(" font 1) (* 2/4 height))
+     (scale (text "(" font 1) (* 1/4 height))
+     (ghost (scale (text "(" font 1) (* 1/4 height)))))
   (define post-paren-image
     (hc-append
      (ghost (scale (text ")" "Helvetica" 1) (* 1/4 height)))
-     (scale (text ")" "Helvetica" 1) (* 1/4 height))
-     (scale (text ")" "Helvetica" 1) (* 2/4 height))
-     (scale (text ")" "Helvetica" 1) (* 3/4 height))))
+     (scale (text ")" font 1) (* 1/4 height))
+     (scale (text ")" font 1) (* 2/4 height))
+     (scale (text ")" font 1) (* 3/4 height))))
 
   (define lambda-logo
     (pict->bitmap
