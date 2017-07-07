@@ -27,76 +27,122 @@
          racket/list
          scribble/html/resource
          pict
+         pict/color
          pict/shadow)
 
-(define (mk-logo height
-                 #:square-pict? [square-pict? #f]
-                 #:text? [text? #f])
-  (define width (* height 2))
-  (define film-ratio (/ height 3))
-  (define film-offset (/ width 15))
-  (define body-height (+ height film-ratio))
+(define (mk-logo [height 100]
+                 #:glossy? [glossy? #t]
+                 #:text? [text? #t]
+                 #:parens [parens? #t])
+  (define body-color "green")
+  (define front-reel-color halt-icon-color)
+  (define back-reel-color syntax-icon-color)
+  (define film-ratio-to-body 2/3)
+  (define body-height (/ height (+ 1 (/ film-ratio-to-body 2))))
+  (define body-width (* body-height 2))
+  (define film-ratio (* body-height 2/3))
+  (define width body-width)
   (define lens-dim 2/3)
-  (define camera (make-object bitmap% width height #f #t))
+  (define camera-body
+    (dc (λ (dc dx dy)
+          (define old-brush (send dc get-brush))
+          (define old-pen (send dc get-pen))
+          (send dc set-pen (new pen% [width 0] [color (icon-color->outline-color body-color)]))
+          (send dc set-brush (new brush% [color (dark body-color)]))
+          (define path (new dc-path%))
+          (send path move-to 0                       0)
+          (send path line-to 0                       body-height)
+          (send path line-to (* body-width lens-dim) body-height)
+          (send path line-to (* body-width lens-dim) (* body-height 3/4))
+          (send path line-to body-width              (* body-height 9/10))
+          (send path line-to body-width              (* body-height 1/10))
+          (send path line-to (* body-width lens-dim) (* body-height 1/4))
+          (send path line-to (* body-width lens-dim) 0)
+          (send path line-to 0                       0)
+          (send dc draw-path path)
+          (send dc set-brush old-brush)
+          (send dc set-pen old-pen))
+        width height))
+  (define back-reel
+    (disk film-ratio
+          #:color back-reel-color
+          #:border-color (icon-color->outline-color back-reel-color)))
+  (define front-reel
+    (disk film-ratio
+          #:color front-reel-color
+          #:border-color (icon-color->outline-color front-reel-color)))
+  
+  (define glossy-body
+    (bitmap-render-icon (pict->bitmap camera-body)
+                        10
+                        metal-icon-material
+                        #;plastic-icon-material))
+  
+  (define glossy-back-reel
+    (bitmap-render-icon (pict->bitmap back-reel)
+                        10
+                        metal-icon-material
+                        #;plastic-icon-material))
+  
+  (define glossy-front-reel
+    (bitmap-render-icon (pict->bitmap front-reel)
+                        10
+                        metal-icon-material
+                        #;plastic-icon-material))
+  
+  (define (assemble-parts body back-reel front-reel width height)
+    (define logo (make-object bitmap% (ceiling width) (ceiling height) #f #t))
+    (define front-film-offset (/ width 20))
+    (define back-film-offset (/ width 4))
+    (define dc (make-object bitmap-dc% logo))
+    (send dc draw-bitmap back-reel front-film-offset 0)
+    (send dc draw-bitmap front-reel back-film-offset 0)
+    (send dc draw-bitmap body 0 (/ film-ratio 2))
+    logo)
 
-  (let ()
-    (define dc (make-object bitmap-dc% camera))
-    (send dc set-pen (new pen% [width 0] [color (icon-color->outline-color run-icon-color)]))
-    (send dc set-brush (new brush% [color run-icon-color]))
-    
-    (define path (new dc-path%))
-    (send path move-to 0             0)
-    (send path line-to 0             height)
-    (send path line-to (* width lens-dim) height)
-    (send path line-to (* width lens-dim) (* height 3/4))
-    (send path line-to width         (* height 9/10))
-    (send path line-to width         (* height 1/10))
-    (send path line-to (* width lens-dim) (* height 1/4))
-    (send path line-to (* width lens-dim) 0)
-    (send path line-to 0             0)
-    (send dc draw-path path))
+  (define plain-logo
+    (if glossy?
+        (assemble-parts glossy-body glossy-back-reel glossy-front-reel width height)
+        (assemble-parts
+         (pict->bitmap camera-body) (pict->bitmap back-reel) (pict->bitmap front-reel) width height)))
   
-  (define camera-body (make-object bitmap% width (ceiling body-height) #f #t))
-  
-  (let ()
-    (define dc (make-object bitmap-dc% camera-body))
-    (send dc draw-bitmap camera 0 film-ratio)
-    (send dc set-brush (new brush% [color "blue"]))
-    (send dc draw-arc film-offset 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi)
-    (send dc set-brush (new brush% [color "red"]))
-    (send dc draw-arc (* 4 film-offset) 0 (* 2 film-ratio) (* 2 film-ratio) 0 pi))
-  
-  (define plain-logo (make-object bitmap% width width #f #t))
-  (let ()
-    (define dc (make-object bitmap-dc% plain-logo))
-    (send dc draw-bitmap camera-body 0 (/ (- width body-height) 2))
-    (void))
-  
-  (define logo-picture
-    (bitmap-render-icon (if square-pict?
-                            plain-logo
-                            camera-body)))
-  
-  (define worded-logo
+  (define pre-paren-image
+    (hc-append
+     (scale (text "(" "Helvetica" 1) (* 3/4 height))
+     (scale (text "(" "Helvetica" 1) (* 2/4 height))
+     (scale (text "(" "Helvetica" 1) (* 1/4 height))
+     (ghost (scale (text "(" "Helvetica" 1) (* 1/4 height)))))
+  (define post-paren-image
+    (hc-append
+     (ghost (scale (text ")" "Helvetica" 1) (* 1/4 height)))
+     (scale (text ")" "Helvetica" 1) (* 1/4 height))
+     (scale (text ")" "Helvetica" 1) (* 2/4 height))
+     (scale (text ")" "Helvetica" 1) (* 3/4 height))))
+
+  (define lambda-logo
     (pict->bitmap
-     (cc-superimpose
-      (bitmap logo-picture)
-      (inset
-       (shadow 
-        (text "Video" "Helvetica" (/ height 2))
-        (/ height 10) (/ height 50)
-        #:color (make-object color% 255 255 255 0.5)
-        #:shadow-color "black")
-       0 (/ height 5) (/ height 5) 0))))
+     (hb-append
+      (if parens? pre-paren-image (blank))
+      (pin-over
+       (bitmap plain-logo)
+       (* body-height 0.4)
+       (* body-height 0.4)
+       (shadow
+        (scale (text "λ" "Helvetica" 1) (* body-height 10/9))
+        (/ body-height 10) (/ body-height 50)
+        #:color (make-object color% 255 255 255 0.75)
+        #:shadow-color "black"))
+      (if parens? post-paren-image (blank)))))
   (if text?
-      worded-logo
-      logo-picture))
+      lambda-logo
+      plain-logo))
+      
 
-(define logo
+(define plain-logo
   (resource
    "logo.png"
    (λ (p)
-     (send (mk-logo 100) save-file p 'png 75))))
+     (send (mk-logo 100 #:parens? #f) save-file p 'png 75))))
 
 (define word-logo
   (resource
@@ -104,10 +150,3 @@
    (λ (p)
      (send (mk-logo 200 #:text? #t) save-file p 'png 75))))
 
-#|
-(define big-logo
-  (resource
-   "blogo.png"
-   (λ (p)
-     (send (mk-logo 1000) save-file p 'png 100))))
-|#
