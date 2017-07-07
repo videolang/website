@@ -47,11 +47,11 @@
   (define font
     (let ()
       (define attempts (list "Linux Libertine Display"
-                             "Linux Libertine Display 0"))
+                             "Linux Libertine Display O"))
       (define intersect (set-intersect (get-face-list) attempts))
       (when (set-empty? intersect)
         (error 'mk-logo "No fount ~s installed, currently installed: ~s" attempts (get-face-list)))
-      (car intersect)))
+      (set-first intersect)))
   (define camera-body
     (dc (λ (dc dx dy)
           (define old-brush (send dc get-brush))
