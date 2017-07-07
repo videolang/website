@@ -18,7 +18,7 @@
      role: "button"
      href: "https://www.mltframework.org/"
      class: "btn btn-primary btn-lg btn-block"]{
-   Donload MLT}
+   Download MLT}
   @center{@h2{Step 3: Download Video}}
   @div[class: "row"]{
    @button[data-toggle: "collapse"
