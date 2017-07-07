@@ -150,12 +150,14 @@
 (define logo
   (resource
    "logo.png"
+   #:exists #f
    (λ (p)
      (send (mk-logo 100 #:parens? #f) save-file p 'png 75))))
 
 (define big-logo
   (resource
    "wlogo.png"
+   #:exists #f
    (λ (p)
      (send (mk-logo 200) save-file p 'png 75))))
 
