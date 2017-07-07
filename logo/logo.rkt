@@ -32,6 +32,7 @@
          pict/shadow)
 
 (define (mk-logo [height 100]
+                 #:square? [square? #f]
                  #:glossy? [glossy? #t]
                  #:text? [text? #t]
                  #:parens? [parens? #t])
@@ -142,10 +143,17 @@
         #:color (make-object color% 255 255 255 0.75)
         #:shadow-color "black"))
       (if parens? post-paren-image (blank)))))
-  (if text?
-      lambda-logo
-      plain-logo))
-      
+  (define logo
+    (if text?
+        lambda-logo
+        plain-logo))
+  (cond [square?
+         (define size (max (send logo get-width) (send logo get-height)))
+         (define logo* (make-object bitmap% (ceiling size) (ceiling size) #f #t))
+         (define dc (make-object bitmap-dc% logo*))
+         (send dc draw-bitmap logo 0 (/ (- size height) 2))
+         logo*]
+        [else logo]))
 
 (define logo
   (resource
