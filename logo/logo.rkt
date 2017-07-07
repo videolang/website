@@ -135,9 +135,9 @@
       (pin-over
        (bitmap plain-logo)
        (* body-height 0.4)
-       (* body-height 0.3) ;(* body-height 0.4)
+       (* body-height 0.25)
        (shadow
-        (scale (text "λ" "Helvetica" 1) (* body-height 10/9))
+        (scale (text "λ" font 1) (* body-height 10/9))
         (/ body-height 10) (/ body-height 50)
         #:color (make-object color% 255 255 255 0.75)
         #:shadow-color "black"))
