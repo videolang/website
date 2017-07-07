@@ -6,7 +6,7 @@
  @div[class: "jumbotron"]{
   @div[class: "container"]{
    @div[class: "splash"]{
-    @center{@img[src: big-logo alt: "Video" height: 200 width: 325]}
+    @center{@img[src: big-logo alt: "Video" height: 200 width: 533]}
     @center{@h1{Video}}
     @h2{A Language for Making Movies}
     @p{@b{Video} is a language for making movies. It combines
