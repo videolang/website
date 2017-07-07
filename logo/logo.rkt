@@ -138,13 +138,13 @@
       plain-logo))
       
 
-(define plain-logo
+(define logo
   (resource
    "logo.png"
    (λ (p)
      (send (mk-logo 100 #:parens? #f) save-file p 'png 75))))
 
-(define word-logo
+(define big-logo
   (resource
    "wlogo.png"
    (λ (p)

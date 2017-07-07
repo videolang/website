@@ -44,7 +44,7 @@
              @span[class: "icon-bar"]
              @span[class: "icon-bar"]}
            @a[class: "navbar-brand" href: (build-path "/" (dict-ref html-navbar-file-table "Home"))]{
-            @img[src: logo alt: "Video logo" height: "51" width: "75"]}}
+            @img[src: logo alt: "Video logo" height: "50" width: "133"]}}
          @div[id: "navbar" class: "navbar-collapse collapse"]{
            @ul[class: "nav navbar-nav pull-right"]{
              @(for/list ([title-pair (in-list html-navbar-file-table)])
