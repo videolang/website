@@ -44,9 +44,14 @@
   (define film-ratio (* body-height 2/3))
   (define width body-width)
   (define lens-dim 2/3)
-  (define font "Linux Libertine Display")
-  (unless (set-member? (get-face-list) font)
-    (error 'mk-logo "Font: ~a not installed" font))
+  (define font
+    (let ()
+      (define attempts (list "Linux Libertine Display"
+                             "Linux Libertine Display 0"))
+      (define intersect (set-intersect (get-face-list) attempts))
+      (when (set-empty? intersect)
+        (error 'mk-logo "No fount ~a installed" attempts))
+      (car intersect)))
   (define camera-body
     (dc (λ (dc dx dy)
           (define old-brush (send dc get-brush))
