@@ -33,7 +33,7 @@
 (define (mk-logo [height 100]
                  #:glossy? [glossy? #t]
                  #:text? [text? #t]
-                 #:parens [parens? #t])
+                 #:parens? [parens? #t])
   (define body-color "green")
   (define front-reel-color halt-icon-color)
   (define back-reel-color syntax-icon-color)
