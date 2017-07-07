@@ -1,5 +1,8 @@
 language: generic
-sudo: false
+
+sudo: true
+dist: trusty
+
 cache:
   directories:
   - "$HOME/.racket"
@@ -15,6 +18,7 @@ addons:
     - python-pygments
 
 before_install:
+- sudo apt-get install fonts-linuxlibertine
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - "./install-racket.sh"
