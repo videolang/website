@@ -25,6 +25,7 @@
      @link[rel: "stylesheet" type: "text/css" href: "/css/pygments.css"]
      @link[rel: "stylesheet" type: "text/css" href: "/css/scribble.css"]
      @link[rel: "stylesheet" type: "text/css" href: "/css/custom.css"]
+     @link[rel: "shortcut icon" href: "logo/tiny.png" type: "image/x-icon"]
      @title[v]{ - Video Language}
      @rest})
 
