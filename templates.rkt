@@ -62,7 +62,7 @@
         @div[class: "copyright"]{
           @p[style: "float:left"]{Copyright © 2016-2017 Leif Andersen}}
         @div[class: "pull-right"]{
-          @img[src: "logo/tiny.png" alt: "Video Logo" height: "25" width: "25"]}}}}
+          @img[src: "/logo/tiny.png" alt: "Video Logo" height: "25" width: "25"]}}}}
     @script[src: "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"]
     @script[src: "js/bootstrap.min.js"]))
 
