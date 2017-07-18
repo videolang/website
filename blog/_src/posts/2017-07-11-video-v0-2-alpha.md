@@ -2,6 +2,8 @@
     Date: 2017-07-11T11:18:14
     Tags: release, by Leif Andersen
 
+**Update:** A second alpha release has been created. This fixes some bugs preventing Video from working on Windows and Linux. Video has now been tested on all three platforms. You can [download the build here][download].
+
 This is an alpha version of Video v0.2. The main update here is dropping MLT as a dependency, and bundling FFmpeg for Windows and Mac builds. As such, Video can be used out of the box on now, without the need to hunt down the more obscure MLT library separately. Linux machines must still download the correct version of FFmpeg themselves. However, this is much easier to do.
 
 Specifically, FFmpeg 3.2 is recommended, but the following specific library versions are also usable:
