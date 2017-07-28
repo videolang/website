@@ -42,7 +42,7 @@
   (define film-ratio-to-body 2/3)
   (define body-height (/ height (+ 1 (/ film-ratio-to-body 2))))
   (define body-width (* body-height 2))
-  (define film-ratio (* body-height 2/3))
+  (define film-ratio (* body-height 4/5))
   (define width body-width)
   (define lens-dim 2/3)
   (define font
@@ -102,7 +102,7 @@
   
   (define (assemble-parts body back-reel front-reel width height)
     (define logo (make-object bitmap% (ceiling width) (ceiling height) #f #t))
-    (define front-film-offset (/ width 20))
+    (define front-film-offset (* width 0.02))
     (define back-film-offset (/ width 4))
     (define dc (make-object bitmap-dc% logo))
     (send dc draw-bitmap back-reel front-film-offset 0)
