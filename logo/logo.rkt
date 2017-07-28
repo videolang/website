@@ -35,6 +35,8 @@
                  #:square? [square? #f]
                  #:glossy? [glossy? #t]
                  #:text? [text? #t]
+                 #:paren-color [paren-color #f]
+                 #:λ-color [λ-color #f]
                  #:parens? [parens? #t])
   (define body-color "green")
   (define front-reel-color halt-icon-color)
@@ -45,7 +47,13 @@
   (define film-ratio (* body-height 4/5))
   (define width body-width)
   (define lens-dim 2/3)
-  (define font
+  (define paren-color*
+    (cond [(string? paren-color) (make-object color% paren-color)]
+          [else paren-color]))
+  (define λ-color*
+    (cond [(string? λ-color) (make-object color% λ-color)]
+          [else λ-color]))
+  (define base-font
     (let ()
       (define attempts (list "Linux Libertine Display"
                              "Linux Libertine Display O"))
@@ -53,6 +61,14 @@
       (when (set-empty? intersect)
         (error 'mk-logo "No fount ~s installed, currently installed: ~s" attempts (get-face-list)))
       (set-first intersect)))
+  (define λ-font
+    (if λ-color
+        (cons λ-color* base-font)
+        base-font))
+  (define font
+    (if paren-color
+        (cons paren-color* base-font)
+        base-font))
   (define camera-body
     (dc (λ (dc dx dy)
           (define old-brush (send dc get-brush))
@@ -115,7 +131,7 @@
         (assemble-parts glossy-body glossy-back-reel glossy-front-reel width height)
         (assemble-parts
          (pict->bitmap camera-body) (pict->bitmap back-reel) (pict->bitmap front-reel) width height)))
-  
+
   (define pre-paren-image
     (hc-append
      (scale (text "(" font 1) (* 3/4 height))
@@ -124,7 +140,7 @@
      (ghost (scale (text "(" font 1) (* 1/4 height)))))
   (define post-paren-image
     (hc-append
-     (ghost (scale (text ")" "Helvetica" 1) (* 1/4 height)))
+     (ghost (scale (text ")" font 1) (* 1/4 height)))
      (scale (text ")" font 1) (* 1/4 height))
      (scale (text ")" font 1) (* 2/4 height))
      (scale (text ")" font 1) (* 3/4 height))))
@@ -138,7 +154,7 @@
        (* body-height 0.4)
        (* body-height 0.25)
        (shadow
-        (scale (text "λ" font 1) (* body-height 10/9))
+        (scale (text "λ" λ-font 1) (* body-height 10/9))
         (/ body-height 10) (/ body-height 50)
         #:color (make-object color% 255 255 255 0.75)
         #:shadow-color "black"))
