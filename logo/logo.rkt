@@ -67,13 +67,15 @@
               (* 1/2 (- diam (pict-height rotated-reel)))
               (* 1/2 (- diam (pict-width rotated-reel)))))
 
-(define (mk-logo [height 100]
+(define (mk-logo [out-height 100]
                  #:square? [square? #f]
                  #:glossy? [glossy? #t]
                  #:text? [text? #t]
                  #:paren-color [paren-color #f]
                  #:λ-color [λ-color #f]
                  #:parens? [parens? #t])
+  (define height 1000)
+  (define scale-ratio (/ out-height height))
   (define body-color "green")
   (define front-reel-color halt-icon-color)
   (define back-reel-color syntax-icon-color)
@@ -198,13 +200,15 @@
     (if text?
         lambda-logo
         plain-logo))
-  (cond [square?
-         (define size (max (send logo get-width) (send logo get-height)))
-         (define logo* (make-object bitmap% (ceiling size) (ceiling size) #f #t))
-         (define dc (make-object bitmap-dc% logo*))
-         (send dc draw-bitmap logo 0 (/ (- size height) 2))
-         logo*]
-        [else logo]))
+  (define padded-logo
+    (cond [square?
+           (define size (max (send logo get-width) (send logo get-height)))
+           (define logo* (make-object bitmap% (ceiling size) (ceiling size) #f #t))
+           (define dc (make-object bitmap-dc% logo*))
+           (send dc draw-bitmap logo 0 (/ (- size height) 2))
+           logo*]
+          [else logo]))
+  (pict->bitmap (scale (bitmap padded-logo) scale-ratio)))
 
 ;(mk-logo 1000 #:parens? #f)
 ;(mk-logo 1000 #:parens? #f #:glossy? #f)
