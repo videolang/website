@@ -31,6 +31,42 @@
          pict/color
          pict/shadow)
 
+(define (mk-reel diam color theta)
+  (define circ
+    (disk diam))
+  (define alpha-circ
+    (disk (* diam 1/6)
+          #:color "white"))
+  (define mask
+    (make-object bitmap% (ceiling diam) (ceiling diam) #t))
+  (define mask-dc
+    (new bitmap-dc% [bitmap mask]))
+  (send mask-dc draw-bitmap (pict->bitmap circ) 0 0)
+  (define (add-hole x y)
+    (send mask-dc draw-bitmap (pict->bitmap alpha-circ) x y))
+  (add-hole (* diam 5/12) (* diam 1/10))
+  (add-hole (* diam 5/12) (* diam 15/20))
+  (add-hole (* diam 3/20) (* diam 5/20))
+  (add-hole (* diam 3/20) (* diam 11/20))
+  (add-hole (* diam 14/20) (* diam 5/20))
+  (add-hole (* diam 14/20) (* diam 11/20))
+  (define reel
+    (dc (λ (dc dx dy)
+          (send dc draw-bitmap
+                (pict->bitmap (disk diam
+                                    #:color color
+                                    #:border-color (icon-color->outline-color color)))
+                0
+                0
+                'solid
+                (send the-color-database find-color "black")
+                mask))
+        diam diam))
+  (define rotated-reel (rotate reel theta))
+  (inset/clip rotated-reel
+              (* 1/2 (- diam (pict-height rotated-reel)))
+              (* 1/2 (- diam (pict-width rotated-reel)))))
+
 (define (mk-logo [height 100]
                  #:square? [square? #f]
                  #:glossy? [glossy? #t]
@@ -41,8 +77,8 @@
   (define body-color "green")
   (define front-reel-color halt-icon-color)
   (define back-reel-color syntax-icon-color)
-  (define film-ratio-to-body 2/3)
-  (define body-height (/ height (+ 1 (/ film-ratio-to-body 2))))
+  (define film-ratio-to-body 4/5)
+  (define body-height (/ height (+ 1 (* film-ratio-to-body 3/5))))
   (define body-width (* body-height 2))
   (define film-ratio (* body-height 4/5))
   (define width body-width)
@@ -62,9 +98,10 @@
         (error 'mk-logo "No fount ~s installed, currently installed: ~s" attempts (get-face-list)))
       (set-first intersect)))
   (define λ-font
-    (if λ-color
-        (cons λ-color* base-font)
-        base-font))
+    (cond
+     [λ-color (cons λ-color* base-font)]
+     [glossy? base-font]
+     [else (cons (make-object color% "white") base-font)]))
   (define font
     (if paren-color
         (cons paren-color* base-font)
@@ -90,13 +127,9 @@
           (send dc set-pen old-pen))
         width height))
   (define back-reel
-    (disk film-ratio
-          #:color back-reel-color
-          #:border-color (icon-color->outline-color back-reel-color)))
+    (mk-reel film-ratio back-reel-color (* pi 15/40)))
   (define front-reel
-    (disk film-ratio
-          #:color front-reel-color
-          #:border-color (icon-color->outline-color front-reel-color)))
+    (mk-reel film-ratio front-reel-color (* pi 9/20)))
   
   (define glossy-body
     (bitmap-render-icon (pict->bitmap camera-body)
@@ -123,7 +156,7 @@
     (define dc (make-object bitmap-dc% logo))
     (send dc draw-bitmap back-reel front-film-offset 0)
     (send dc draw-bitmap front-reel back-film-offset 0)
-    (send dc draw-bitmap body 0 (/ film-ratio 2))
+    (send dc draw-bitmap body 0 (* film-ratio 3/5))
     logo)
 
   (define plain-logo
@@ -152,12 +185,14 @@
       (pin-over
        (bitmap plain-logo)
        (* body-height 0.4)
-       (* body-height 0.25)
-       (shadow
-        (scale (text "λ" λ-font 1) (* body-height 10/9))
-        (/ body-height 10) (/ body-height 50)
-        #:color (make-object color% 255 255 255 0.75)
-        #:shadow-color "black"))
+       (* body-height 0.4)
+       (if glossy?
+           (shadow
+            (scale (text "λ" λ-font 1) (* body-height 10/9))
+            (/ body-height 10) (/ body-height 50)
+            #:color (make-object color% 255 255 255 0.75)
+            #:shadow-color "black")
+           (scale (text "λ" λ-font 1) (* body-height 10/9))))
       (if parens? post-paren-image (blank)))))
   (define logo
     (if text?
@@ -170,6 +205,9 @@
          (send dc draw-bitmap logo 0 (/ (- size height) 2))
          logo*]
         [else logo]))
+
+(mk-logo 1000 #:parens? #f)
+(mk-logo 1000 #:parens? #f #:glossy? #f)
 
 (define logo
   (resource
