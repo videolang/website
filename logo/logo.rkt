@@ -206,8 +206,8 @@
          logo*]
         [else logo]))
 
-(mk-logo 1000 #:parens? #f)
-(mk-logo 1000 #:parens? #f #:glossy? #f)
+;(mk-logo 1000 #:parens? #f)
+;(mk-logo 1000 #:parens? #f #:glossy? #f)
 
 (define logo
   (resource
