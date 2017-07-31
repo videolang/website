@@ -4,9 +4,9 @@
  @div[class: "jumbotron"]{
   @div[class: "container"]{@h1{Documentation}}}
    @div[class: "container"]{
-  @h2{Video Reference}
+  @h2{Video Manual}
   @p{You can find the current documentation for Video
-   @a[href: "http://docs.racket-lang.org/video/index.html"]{
+   @a[href: "http://docs.racket-lang.org/video@video-v0-1/index.html"]{
     on the Racket docs website}.}
   @h2{Publications}
   @p{This is a list of Video related publications.}
