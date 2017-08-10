@@ -31,9 +31,11 @@
   (define tmp-dir (make-temporary-file "rkttmp~a" 'directory))
   (parameterize ([current-directory tmp-dir])
     (system* git "clone" video-src "video")
+    (parameterize ([current-directory (build-path "video")])
+      (system* (find-exe) "-l" "raco" "pkg" "install"))
     (parameterize ([current-directory (build-path "video" "video" "scribblings")])
       (system* (find-exe) "-l" "raco" "scribble" "--htmls"
                "+m" "--redirect-main" "http://docs.racket-lang.org/" "video.scrbl")
-      (copy-directory/files "video" (build-path project-root-dir "man")))))
+      (copy-directory/files "video" (build-path project-root-dir "manl")))))
 
 (build)
