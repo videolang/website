@@ -32,7 +32,7 @@
   (parameterize ([current-directory tmp-dir])
     (system* git "clone" video-src "video")
     (parameterize ([current-directory (build-path "video")])
-      (system* (find-exe) "-l" "raco" "pkg" "install") "--deps" "search-auto")
+      (system* (find-exe) "-l" "raco" "pkg" "install" "--auto" "--skip-installed"))
     (parameterize ([current-directory (build-path "video" "video" "scribblings")])
       (system* (find-exe) "-l" "raco" "scribble" "--htmls"
                "+m" "--redirect-main" "http://docs.racket-lang.org/" "video.scrbl")
