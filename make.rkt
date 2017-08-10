@@ -28,8 +28,8 @@
     (system* (find-exe) "-l" "raco" "pkg" "install" "--auto" "--skip-installed" "frog")
     (system* (find-exe) "-l" "raco" "frog" "-b"))
   ;; Render current manual
-  (define tmp-dir (make-temporary-file "rkttmp~a" 'directory))
-  (parameterize ([current-directory tmp-dir])
+  ;;(define tmp-dir (make-temporary-file "rkttmp~a" 'directory))
+  #;(parameterize ([current-directory tmp-dir])
     (system* git "clone" video-src "video")
     (parameterize ([current-directory (build-path "video")])
       (system* (find-exe) "-l" "raco" "pkg" "install" "--auto" "--skip-installed"))

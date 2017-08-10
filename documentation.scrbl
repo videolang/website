@@ -10,9 +10,9 @@
     on the Racket docs website}.
    Older versions of this manual are also available:
    @ul{
-    @li{@a[href: "man/index.html"]{v0.2 (beta)}}}
+    @;@li{@a[href: "man/index.html"]{v0.2 (beta)}}
     @li{@a[href: "http://docs.racket-lang.org/video@video-v0-1/index.html"]{v0.1}}
-    @li{@a[href: "http://docs.racket-lang.org/video@video-v0-0/index.html"]{v0.0}}}
+    @li{@a[href: "http://docs.racket-lang.org/video@video-v0-0/index.html"]{v0.0}}}}
   @h2{Publications}
   @p{This is a list of Video related publications.}
   @ul{
