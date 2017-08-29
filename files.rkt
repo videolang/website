@@ -21,6 +21,7 @@
 
 (define-runtime-path-list files
   (list* "blog/_src/page-template.scrb2"
+         "pub/icfp2017/errata.scrbl"
          (dict-values file-table)))
 
 (define html-navbar-file-table
