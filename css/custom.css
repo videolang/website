@@ -32,6 +32,18 @@
     background-color: crimson;
 }
 
+.btn-snd-oval {
+    width: 60%;
+    height: 40px;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 25px;
+    line-height: 1.42;
+    border-radius: 50px;
+    color: black;
+    background-color: #cccccc;
+}
+
 .blurb {
     text-align: center;
 }

@@ -18,4 +18,15 @@
      @a[class: "btn-oval btn btn-default btn-lg"
         href: "download.html"
         role: "button"]{
-      Get Started}}}}}}
+      Get Started}}
+    @br{}
+    @center{
+     @a[class: "btn-snd-oval btn btn-default btn-lg"
+        href: "https://github.com/videolang/video"
+        role: "button"]{
+     View us on Github}}
+    @center{
+     @a[class: "btn-snd-oval btn btn-default btn-lg"
+        href: "https://twitter.com/videolang"
+        role: "button"]{
+      Follow us on Twitter}}}}}}
