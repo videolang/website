@@ -26,24 +26,30 @@
    @div[class:"container"]{
     @div[class: "panel-group" id: "accordion"]{
      @div[class: "panel panel-primary"]{
-      @h4[class: "panel-title"]{
+      @h3[class: "panel-title"]{
        @a[data-toggle: "collapse"
           data-parent: "#accordion"
           href: "#collapse1"]{
-        Install in DrRacket}}
+        Option A: Install in DrRacket (Recommended)}}
       @div[id: "collapse1" class: "panel-collapse collapse in"]{
        @div[class: "panel-body"]{
-        @img[src: "res/install-step1.png"
-             alt: "Installation Step 1"]
-        @img[src: "res/install-step2.png"
-             alt: "Installation Step 2"]}}
+        @p{
+         @center{
+          @img[src: "res/install-step1.png"
+               alt: "Installation Step 1"
+               width: "600"]}}
+        @p{
+         @center{
+          @img[src: "res/install-step2.png"
+               alt: "Installation Step 2"
+               width: "800"]}}}}
       @div[class: "panel-group" id: "accordion"]{
        @div[class: "panel panel-primary"]{
-        @h4[class: "panel-title"]{
+        @h3[class: "panel-title"]{
          @a[data-toggle: "collapse"
             data-parent: "#accordion"
             href: "#collapse2"]{
-          Install with command line}}}}
+          Option B: Install with command line}}}}
       @div[id: "collapse2" class: "panel-collapse collapse"]{
        @div[class: "panel-boy"]{
         If you have added Racket to your @kbd{$PATH}, you can
