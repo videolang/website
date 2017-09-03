@@ -13,7 +13,8 @@
 
   @h2{Install Testing (Recommended)}
   
-  @p{On Windows and macOS, you can download Video directly within Racket.}
+  @p{On Windows and macOS, you can download Video directly
+   within Racket. On Linux you also need to install FFmpeg.}
 
   @div[class: "container"]{
    @center{@h3{Step 1: Download Racket}}
@@ -33,16 +34,26 @@
         Option A: Install in DrRacket (Recommended)}}
       @div[id: "collapse1" class: "panel-collapse collapse in"]{
        @div[class: "panel-body"]{
+                                 
+        @p{Open DrRacket and go to @kbd{@kbd{File} -> @kbd{Install
+           Package}}}
+         
         @p{
          @center{
           @img[src: "res/install-step1.png"
                alt: "Installation Step 1"
                width: "600"]}}
+
+        @p{In the dialog box that pops up, type @kbd{
+          video-testing}. Note the '-testing', if you miss that the
+         wrong package will be installed.}
+        
         @p{
          @center{
           @img[src: "res/install-step2.png"
                alt: "Installation Step 2"
-               width: "800"]}}}}
+               width: "800"]}}
+        @p{And that's it. You can also press @kbd{F1} for documentation.}}}
       @div[class: "panel-group" id: "accordion"]{
        @div[class: "panel panel-primary"]{
         @h3[class: "panel-title"]{
