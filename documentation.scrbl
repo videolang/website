@@ -21,4 +21,5 @@
     ICFP 2017
     (@a[href: "pub/icfp2017.pdf"]{PDF},
     @a[href: "pub/icfp2017/errata.html"]{Errata})
-    (@a[href: "pub/icfp2017/slides.pdf"]{Slides})}}}}
+    (@a[href: "pub/icfp2017/slides.pdf"]{Slides},
+    @a[href: "https://github.com/videolang/website/tree/master/pub/icfp2017/slidesrc"]{Source})}}}}
