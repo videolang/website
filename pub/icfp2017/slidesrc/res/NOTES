@@ -1,0 +1,5 @@
+racket-logo.png:
+convert racket-logo.svg racket-logo.png
+
+racket-logo.mp4:
+ffmpeg -loop 1 -i racket-logo.png -c:v libx264 -t 30 -pix_fmt yuv420p racket-logo.mp4
