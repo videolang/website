@@ -19,7 +19,7 @@
    @li{@b{Super 8 Languages for Making Movies (A Functional
      Pearl).} Leif Andersen, Stephen Chang, Matthias Felleisen.
     ICFP 2017
-    (@a[href: "pub/icfp2017.pdf"]{PDF},
+    (@a[href: "https://doi.org/10.1145/3110274"]{PDF},
     @a[href: "pub/icfp2017/errata.html"]{Errata})
     (@a[href: "pub/icfp2017/slides.pdf"]{Slides},
     @a[href: "https://github.com/videolang/website/tree/master/pub/icfp2017/slidesrc"]{Source})}}}}
