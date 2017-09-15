@@ -54,8 +54,8 @@
                   @li[role: "presentation" class: "active"]{@a[href: "#" (car title-pair)]}]
                  [else @li[role: "presentation"]{@a[href: (build-path "/" (cdr title-pair)) (car title-pair)]}]))}}}}})
 
-@(define (footer . v)
-   (list
+@(define (footer #:rest [rest '()] . v)
+   (list*
     @div[class: "footer-color"]{
     @div[class: "container"]{
       @element/not-empty["footer" class: "footer float:right"]{
@@ -64,10 +64,12 @@
         @div[class: "pull-right"]{
           @img[src: "/logo/tiny.png" alt: "Video Logo" height: "25" width: "25"]}}}}
     @script[src: "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"]
-    @script[src: "js/bootstrap.min.js"]))
+    @script[src: "/js/bootstrap.min.js"]
+    rest))
 
 @(define (page #:title title
                #:header-rest [header-rest '()]
+               #:footer-rest [footer-rest '()]
                . content)
    (list @doctype{html}
          @html[lang: "en"]{
@@ -75,5 +77,5 @@
            @body[id: "pn-top"]{
              @navbar[title]
              @content
-             @footer{}}}))
+             @footer[#:rest footer-rest]{}}}))
 

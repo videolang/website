@@ -5,7 +5,10 @@
                           @link[rel: "alternate" type: "application/atom+xml"
                                 href: "@|atom-feed-uri|" title: "Atom Feed"]
                           @link[rel: "alternate" type: "application/rss+xml"
-                                href: "@|rss-feed-uri|" title: "RSS Feed"])]{
+                                href: "@|rss-feed-uri|" title: "RSS Feed"]
+                          @script[src:
+                                  "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"]
+                          @script[src: "/js/comments.js"])]{
  @div[class: "jumbotron"]{
   @div[class: "container"]{@h1{Video Blog}}}
  @div[class: "container"]{
