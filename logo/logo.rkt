@@ -132,19 +132,24 @@
     (mk-reel film-ratio back-reel-color (* pi 15/40)))
   (define front-reel
     (mk-reel film-ratio front-reel-color (* pi 9/20)))
-  
+
+  (define oversized-glossy-body
+    (rotate
+     (bitmap (bitmap-render-icon (pict->bitmap (rotate camera-body (* pi 1/15)))
+                                 10
+                                 metal-icon-material
+                                 #;plastic-icon-material))
+       (* pi -1/15)))
   (define glossy-body
-    (bitmap-render-icon (pict->bitmap camera-body)
-                        10
-                        metal-icon-material
-                        #;plastic-icon-material))
-  
+    (pict->bitmap
+     (inset/clip oversized-glossy-body
+                 (* 1/2 (- body-width (pict-width oversized-glossy-body)))
+                 (* 1/2 (- height (pict-height oversized-glossy-body))))))
   (define glossy-back-reel
     (bitmap-render-icon (pict->bitmap back-reel)
                         10
                         metal-icon-material
                         #;plastic-icon-material))
-  
   (define glossy-front-reel
     (bitmap-render-icon (pict->bitmap front-reel)
                         10
@@ -210,7 +215,9 @@
           [else logo]))
   (pict->bitmap (scale (bitmap padded-logo) scale-ratio)))
 
+;(mk-logo 250 #:parens? #f)
 ;(mk-logo 1000 #:parens? #f)
+;(mk-logo 5000 #:parens? #f)
 ;(mk-logo 1000 #:parens? #f #:glossy? #f)
 
 (define logo
