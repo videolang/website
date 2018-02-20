@@ -31,7 +31,7 @@
          pict/color
          pict/shadow)
 
-(define current-default-backing-height (make-parameter 4000))
+(define current-default-backing-height (make-parameter 2000))
 
 (define (mk-reel diam color theta)
   (define circ
