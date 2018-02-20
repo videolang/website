@@ -1,10 +1,13 @@
 #!/usr/bin/env racket
 #lang racket
 
-(require "make.rkt"
-         web-server/servlet-env
+(require web-server/servlet-env
          web-server/dispatchers/dispatch
-         racket/runtime-path)
+         racket/runtime-path
+         "logo/logo.rkt")
+
+(parameterize ([current-default-backing-height 200])
+  (dynamic-require "make.rkt" #f))
 
 (define-runtime-path here ".")
 

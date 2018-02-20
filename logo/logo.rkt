@@ -31,6 +31,8 @@
          pict/color
          pict/shadow)
 
+(define current-default-backing-height (make-parameter 4000))
+
 (define (mk-reel diam color theta)
   (define circ
     (disk diam))
@@ -73,8 +75,8 @@
                  #:text? [text? #t]
                  #:paren-color [paren-color #f]
                  #:λ-color [λ-color #f]
-                 #:parens? [parens? #t])
-  (define height 1000)
+                 #:parens? [parens? #t]
+                 #:backing-height [height (current-default-backing-height)])
   (define scale-ratio (/ out-height height))
   (define body-color "green")
   (define front-reel-color halt-icon-color)
@@ -213,7 +215,17 @@
            (send dc draw-bitmap logo 0 (/ (- size height) 2))
            logo*]
           [else logo]))
-  (pict->bitmap (scale (bitmap padded-logo) scale-ratio)))
+  (pict->bitmap (scale (freeze (bitmap padded-logo)) scale-ratio)))
+
+
+#|
+(require racket/pretty)
+(for ([i (in-range 20)])
+  (define backing-height (+ 500 (* 100 i)))
+  (displayln backing-height)
+  (pretty-write (time (mk-logo 100 #:backing-height backing-height)))
+  (newline))
+|#
 
 ;(mk-logo 250 #:parens? #f)
 ;(mk-logo 1000 #:parens? #f)
@@ -230,5 +242,4 @@
   (resource
    "wlogo.png"
    (λ (p)
-     (send (mk-logo 200) save-file p 'png 75))))
-
+     (send (mk-logo 200 #:parens? #t) save-file p 'png 75))))
