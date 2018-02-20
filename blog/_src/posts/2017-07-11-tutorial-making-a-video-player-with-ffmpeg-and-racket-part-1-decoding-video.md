@@ -1,6 +1,7 @@
     Title: Tutorial: Making a Video Player with FFmpeg and Racket (Part 1, Decoding Video)
     Date: 2017-07-11T11:46:00
-    Tags: tutorial, ffmpeg, opengl, racket, by Leif Andersen, DRAFT
+    Tags: tutorial, ffmpeg, opengl, racket, DRAFT
+    Authors: Leif Andersen
 
 [FFmpeg][ffmpeg] is a fantastic library for making multimedia applications. For example, [Video][video] uses it as [a backend for its video processing][videoffmpeg]. Unfortunately, while the library itself is great, there are not many tutorials on how to use it as a library.<sup>1</sup> Martin Bohme has written [a nice tutorial][dranger] on how to use FFmpeg to create a media player. This is a fantastic tutorial, but uses the [now deprecated FFmpeg API].[ffmpegdep].
 

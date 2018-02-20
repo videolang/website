@@ -1,6 +1,7 @@
     Title: Video v0.2 Alpha
     Date: 2017-07-11T11:18:14
-    Tags: release, by Leif Andersen
+    Tags: release
+    Authors: Leif Andersen
 
 **Update2** A third alpha is released. This should be the last alpha build. The next release will be a beta. You can [download the build here][download3].
 

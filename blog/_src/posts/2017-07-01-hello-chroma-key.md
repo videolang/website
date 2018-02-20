@@ -1,6 +1,7 @@
     Title: Hello Chroma Key
     Date: 2017-07-01T22:11:41
-    Tags: announcements, by Leif Andersen
+    Tags: announcements
+    Authors: Leif Andersen
 
 Welcome to the Video Blog. This blog is for Video release
 announcements, status updates, tutorials, and anything relevant
