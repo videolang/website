@@ -24,9 +24,9 @@
      @a[class: "btn-snd-oval btn btn-default btn-lg"
         href: "https://twitter.com/videolang"
         role: "button"]{
+      Follow us on Twitter}
      @center{
      @a[class: "btn-snd-oval btn btn-default btn-lg"
         href: "https://www.redbubble.com/people/leifandersen/works/30461319-video-lang-swag"
         role: "button"]{
-        Get Video Swag}}
-     Follow us on Twitter}}}}}}
+        Get Video Swag}}}}}}}
