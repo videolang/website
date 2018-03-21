@@ -103,76 +103,77 @@
       (set-first intersect)))
   (define λ-font
     (cond
-     [λ-color (cons λ-color* base-font)]
-     [glossy? base-font]
-     [else (cons (make-object color% "white") base-font)]))
+      [λ-color (cons λ-color* base-font)]
+      [glossy? base-font]
+      [else (cons (make-object color% "white") base-font)]))
   (define font
     (if paren-color
         (cons paren-color* base-font)
         base-font))
-  (define camera-body
-    (dc (λ (dc dx dy)
-          (define old-brush (send dc get-brush))
-          (define old-pen (send dc get-pen))
-          (send dc set-pen (new pen% [width 0] [color (icon-color->outline-color body-color)]))
-          (send dc set-brush (new brush% [color (dark body-color)]))
-          (define path (new dc-path%))
-          (send path move-to 0                       0)
-          (send path line-to 0                       body-height)
-          (send path line-to (* body-width lens-dim) body-height)
-          (send path line-to (* body-width lens-dim) (* body-height 3/4))
-          (send path line-to body-width              (* body-height 9/10))
-          (send path line-to body-width              (* body-height 1/10))
-          (send path line-to (* body-width lens-dim) (* body-height 1/4))
-          (send path line-to (* body-width lens-dim) 0)
-          (send path line-to 0                       0)
-          (send dc draw-path path)
-          (send dc set-brush old-brush)
-          (send dc set-pen old-pen))
-        width height))
-  (define back-reel
-    (mk-reel film-ratio back-reel-color (* pi 15/40)))
-  (define front-reel
-    (mk-reel film-ratio front-reel-color (* pi 9/20)))
-
-  (define oversized-glossy-body
-    (rotate
-     (bitmap (bitmap-render-icon (pict->bitmap (rotate camera-body (* pi 1/15)))
-                                 10
-                                 metal-icon-material
-                                 #;plastic-icon-material))
-       (* pi -1/15)))
-  (define glossy-body
-    (pict->bitmap
-     (inset/clip oversized-glossy-body
-                 (* 1/2 (- body-width (pict-width oversized-glossy-body)))
-                 (* 1/2 (- height (pict-height oversized-glossy-body))))))
-  (define glossy-back-reel
-    (bitmap-render-icon (pict->bitmap back-reel)
-                        10
-                        metal-icon-material
-                        #;plastic-icon-material))
-  (define glossy-front-reel
-    (bitmap-render-icon (pict->bitmap front-reel)
-                        10
-                        metal-icon-material
-                        #;plastic-icon-material))
-  
-  (define (assemble-parts body back-reel front-reel width height)
-    (define logo (make-object bitmap% (ceiling width) (ceiling height) #f #t))
-    (define front-film-offset (* width 0.02))
-    (define back-film-offset (/ width 4))
-    (define dc (make-object bitmap-dc% logo))
-    (send dc draw-bitmap back-reel front-film-offset 0)
-    (send dc draw-bitmap front-reel back-film-offset 0)
-    (send dc draw-bitmap body 0 (* film-ratio 3/5))
-    logo)
-
   (define plain-logo
-    (if glossy?
-        (assemble-parts glossy-body glossy-back-reel glossy-front-reel width height)
-        (assemble-parts
-         (pict->bitmap camera-body) (pict->bitmap back-reel) (pict->bitmap front-reel) width height)))
+    (let ()
+      (define camera-body
+        (dc (λ (dc dx dy)
+              (define old-brush (send dc get-brush))
+              (define old-pen (send dc get-pen))
+              (send dc set-pen (new pen% [width 0] [color (icon-color->outline-color body-color)]))
+              (send dc set-brush (new brush% [color (dark body-color)]))
+              (define path (new dc-path%))
+              (send path move-to 0                       0)
+              (send path line-to 0                       body-height)
+              (send path line-to (* body-width lens-dim) body-height)
+              (send path line-to (* body-width lens-dim) (* body-height 3/4))
+              (send path line-to body-width              (* body-height 9/10))
+              (send path line-to body-width              (* body-height 1/10))
+              (send path line-to (* body-width lens-dim) (* body-height 1/4))
+              (send path line-to (* body-width lens-dim) 0)
+              (send path line-to 0                       0)
+              (send dc draw-path path)
+              (send dc set-brush old-brush)
+              (send dc set-pen old-pen))
+            width height))
+      (define back-reel
+        (mk-reel film-ratio back-reel-color (* pi 15/40)))
+      (define front-reel
+        (mk-reel film-ratio front-reel-color (* pi 9/20)))
+
+      (define oversized-glossy-body
+        (rotate
+         (bitmap (bitmap-render-icon (pict->bitmap (rotate camera-body (* pi 1/15)))
+                                     10
+                                     metal-icon-material
+                                     #;plastic-icon-material))
+         (* pi -1/15)))
+      (define glossy-body
+        (pict->bitmap
+         (inset/clip oversized-glossy-body
+                     (* 1/2 (- body-width (pict-width oversized-glossy-body)))
+                     (* 1/2 (- height (pict-height oversized-glossy-body))))))
+      (define glossy-back-reel
+        (bitmap-render-icon (pict->bitmap back-reel)
+                            10
+                            metal-icon-material
+                            #;plastic-icon-material))
+      (define glossy-front-reel
+        (bitmap-render-icon (pict->bitmap front-reel)
+                            10
+                            metal-icon-material
+                            #;plastic-icon-material))
+  
+      (define (assemble-parts body back-reel front-reel width height)
+        (define logo (make-object bitmap% (ceiling width) (ceiling height) #f #t))
+        (define front-film-offset (* width 0.02))
+        (define back-film-offset (/ width 4))
+        (define dc (make-object bitmap-dc% logo))
+        (send dc draw-bitmap back-reel front-film-offset 0)
+        (send dc draw-bitmap front-reel back-film-offset 0)
+        (send dc draw-bitmap body 0 (* film-ratio 3/5))
+        logo)
+
+      (if glossy?
+          (assemble-parts glossy-body glossy-back-reel glossy-front-reel width height)
+          (assemble-parts
+           (pict->bitmap camera-body) (pict->bitmap back-reel) (pict->bitmap front-reel) width height))))
 
   (define pre-paren-image
     (hc-append
