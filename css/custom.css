@@ -60,7 +60,7 @@ body {
 }
 
 h1 {
-    font-size: 60px;
+    font-size: 50px;
 }
 
 h2 {
@@ -83,3 +83,20 @@ article {
     padding: 20px;
 }
 
+
+/* When highlighted code blocks are too wide, they */
+/* wrap -- resulting in the line numbers column's */
+/* rows not lining up with the code rows. Prevent */
+/* wrapping. */
+pre {
+    white-space: pre;
+    width: inherit;
+}
+
+.linenodiv pre {
+    margin-right: 1px;
+}
+
+.source pre {
+    margin-left: 1px;
+}
