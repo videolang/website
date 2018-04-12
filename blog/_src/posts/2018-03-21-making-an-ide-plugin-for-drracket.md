@@ -218,7 +218,7 @@ This post shows you how to make plugins for the DrRacket IDE. Both language-spec
 [^reqs]: Note that to make this mixin, the tool also must require `racket/class` and `racket/gui/base`.
 
 [PluginDocs]: https://docs.racket-lang.org/tools/index.html
-[ScrPlugin]: https://docs.racket-lang.org/script-plugin/index.html
+[ScrPlugin]: https://docs.racket-lang.org/quickscript/index.html
 [vimmode]: https://github.com/takikawa/drracket-vim-tool
 [BeautifulRacket]: https://beautifulracket.com/#tutorials
 [LanguagesDotfiles]: http://blog.racket-lang.org/2017/03/languages-as-dotfiles.html
