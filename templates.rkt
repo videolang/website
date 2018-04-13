@@ -27,7 +27,7 @@
      @link[rel: "stylesheet" type: "text/css" href: "/css/custom.css"]
      @link[rel: "shortcut icon" href: "logo/tiny.png" type: "image/x-icon"]
      @; Tracking, should we choose to use it.
-     @;{@script[type: "text/javascript"]{@literal{
+     @script[type: "text/javascript"]{@literal{
   /* NOTE: This script uses piwik, anonymizes data, and respects
      users' do not track setting. The information is stored on a
      Video Lang computer and does not go through any third party.*/
@@ -36,12 +36,12 @@
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="//westmount.ccs.neu.edu:9002/piwik/";
+    var u="http://westmount.ccs.neu.edu:9002/piwik/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
     _paq.push(['setSiteId', '1']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();}}}
+  })();}}
      @title[v]{ - Video Language}
      @rest})
 
