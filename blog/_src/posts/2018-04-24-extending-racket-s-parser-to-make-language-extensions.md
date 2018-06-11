@@ -1,6 +1,7 @@
     Title: Extending Racket's Parser to make Language Extensions
     Date: 2018-04-24T14:20:20
-    Tags: tutorial, DRAFT
+    Tags: racket, parsing, tutorial, DRAFT
+    Authors: Leif Andersen
 
 _Replace this with your post text. Add one or more comma-separated
 Tags above. The special tag `DRAFT` will prevent the post from being
