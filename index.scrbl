@@ -2,7 +2,7 @@
 
 @(require "logo/logo.rkt")
 
-@page[#:title "Main"]{
+@page[#:title "A Language for Multimedia Creation"]{
  @div[class: "jumbotron"]{
   @div[class: "container"]{
    @div[class: "splash"]{
