@@ -42,7 +42,7 @@
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();}}
-     @title[v]{ - Video Language}
+     @title{Video Language - @v}
      @rest})
 
 @(define (navbar . current-page)
