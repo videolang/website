@@ -2,6 +2,8 @@
     Date: 2018-06-10T21:49:43
     Tags: release
 
+**Update:** We have released a second release candidate. This fixes several bugs users have posted on the issue tracker.
+
 The first release candidate for Video v0.2 has been released! You can install it from the command line with:
 
 ```
@@ -20,3 +22,7 @@ Here is a list of the major changes from the last beta:
 * More complete render parameterization.
 * Cleaner error messages.
 * Fixed bug preventing Video from rendering audio-only files.
+* Pause feature no longer additionally stops the video.
+* Improved audio/video syncing in live preview.
+* Fixed bugs in front half of Video compiler.
+* Made 'canvas' an optional parameter
