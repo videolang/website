@@ -1,6 +1,6 @@
     Title: Making an IDE Plugin for DrRacket
     Date: 2018-03-21T12:52:03
-    Tags: drracket, tutorial
+    Tags: racket, drracket, tutorial
     Authors: Leif Andersen
 
 I recently had several students ask me to show them how to make DrRacket plugins for their new language. It is easy to do, but I noticed that there aren any existing guides on how to do it. There is [the plugin documentation][PluginDocs], which is a good reference and has some good examples. Unfortunately, it lacks a good step by step tutorial on how to make new IDE plugins. This post is that tutorial.

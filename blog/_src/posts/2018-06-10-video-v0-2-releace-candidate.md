@@ -1,5 +1,6 @@
     Title: Video v0.2 Releace Candidate
     Date: 2018-06-10T21:49:43
+    Authors: Leif Andersen
     Tags: release
 
 **Update:** We have released a second release candidate. This fixes several bugs users have posted on the issue tracker.
