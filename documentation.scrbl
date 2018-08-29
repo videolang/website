@@ -13,7 +13,10 @@
     @;@li{@a[href: "man/index.html"]{v0.2 (beta)}}
     @li{@a[href: "http://docs.racket-lang.org/video@video-v0-2/index.html"]{v0.2}}
     @li{@a[href: "http://docs.racket-lang.org/video@video-v0-1/index.html"]{v0.1}}
-    @li{@a[href: "http://docs.racket-lang.org/video@video-v0-0/index.html"]{v0.0}}}}
+    @li{@a[href: "http://docs.racket-lang.org/video@video-v0-0/index.html"]{v0.0}}}
+   You can also find the documentation for your local
+   installation of Video by running @kbd{raco docs video} in
+   your terminal, or by clicking @code{Help -> Documentation} inside of DrRacket.}
   @h2{Publications}
   @p{This is a list of Video related publications.}
   @ul{
