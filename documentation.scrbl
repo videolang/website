@@ -6,7 +6,7 @@
  @div[class: "container"]{
   @h2{Video Manual}
   @p{You can find the documentation for the current stable version of Video
-   @a[href: "http://docs.racket-lang.org/video/index.html"]{
+   @a[href: "http://docs.racket-lang.org/video@video/index.html"]{
     on the Racket docs website}.
    Older versions of this manual are also available:
    @ul{
