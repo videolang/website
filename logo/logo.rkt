@@ -74,6 +74,15 @@
               (* 1/2 (- diam (pict-height rotated-reel)))
               (* 1/2 (- diam (pict-width rotated-reel)))))
 
+(define base-font
+  (let ()
+    (define attempts (list "Linux Libertine Display"
+                           "Linux Libertine Display O"))
+    (define intersect (set-intersect (get-face-list) attempts))
+    (when (set-empty? intersect)
+      (error 'mk-logo "No fount ~s installed, currently installed: ~s" attempts (get-face-list)))
+    (set-first intersect)))
+
 (define (mk-logo [out-height 100]
                  #:square? [square? #f]
                  #:glossy? [glossy? #t]
@@ -98,14 +107,6 @@
   (define λ-color*
     (cond [(string? λ-color) (make-object color% λ-color)]
           [else λ-color]))
-  (define base-font
-    (let ()
-      (define attempts (list "Linux Libertine Display"
-                             "Linux Libertine Display O"))
-      (define intersect (set-intersect (get-face-list) attempts))
-      (when (set-empty? intersect)
-        (error 'mk-logo "No fount ~s installed, currently installed: ~s" attempts (get-face-list)))
-      (set-first intersect)))
   (define λ-font
     (cond
       [λ-color (cons λ-color* base-font)]
@@ -249,3 +250,16 @@
    "wlogo.png"
    (λ (p)
      (send (mk-logo 200 #:parens? #t) save-file p 'png 75))))
+
+(define red-reel
+  (cc-superimpose
+   (mk-reel 400 "red" (* pi 1/6))
+   (text "λ" base-font 256)))
+(define gold-reel
+  (cc-superimpose
+   (mk-reel 400 "gold" (* pi 1/6))
+   (text "λ" base-font 256)))
+(define silver-reel
+  (cc-superimpose
+   (mk-reel 400 "silver" (* pi 1/6))
+   (text "λ" base-font 256)))
