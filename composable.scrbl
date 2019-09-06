@@ -1,10 +1,17 @@
 #lang reader "website.rkt"
 
+@(require "logo/logo.rkt")
+
 @page[#:title "Composable"]{
  @div[class: "jumbotron"]{
-  @div[class: "container"]{@h1{Composable}}}
+  @center{
+   @div[class: "container clearfix"]{
+    @img[src: composable-logo
+         alt: "Composable Logo"
+         width: 100
+         class: "pull-left mr-5"]
+    @h1{Composable}}}}
  @div[class: "container"]{
-
   @p{Composable consists of
    @a[href: "https://leifandersen.net"]{Leif Andersen} and
    @a[href: "https://benchung.github.io"]{Benjamin Chung}. We

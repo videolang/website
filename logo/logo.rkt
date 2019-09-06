@@ -251,6 +251,18 @@
    (λ (p)
      (send (mk-logo 200 #:parens? #t) save-file p 'png 75))))
 
+(define composable-logo
+  (resource
+   "clogo.png"
+   (λ (p)
+     (send
+      (pict->bitmap
+       (cc-superimpose
+        (mk-reel 400 "silver" (* pi 1/6))
+        (text "λ" base-font 256)))
+      save-file p 'png 75))))
+
+#|
 (define red-reel
   (cc-superimpose
    (mk-reel 400 "red" (* pi 1/6))
@@ -259,7 +271,4 @@
   (cc-superimpose
    (mk-reel 400 "gold" (* pi 1/6))
    (text "λ" base-font 256)))
-(define silver-reel
-  (cc-superimpose
-   (mk-reel 400 "silver" (* pi 1/6))
-   (text "λ" base-font 256)))
+|#
