@@ -24,9 +24,9 @@
   @br{}
   @div[class: "row"]{
    @div[class: "col-md-6 blurb"]{
-    @center{@img[src: "res/leif.jpg" alt: "Leif Andersen" width: 300]}
+    @center{@img[src: "res/leif.jpg" alt: "Leif Andersen" height: 300]}
     @center{@h2{Leif Andersen}}}
    @div[class: "col-md-6 blurb"]{
-    @center{@img[src: "res/ben.jpg" alt: "Benjamin Chung" width: 300]}
+    @center{@img[src: "res/ben.jpg" alt: "Benjamin Chung" height: 300]}
     @center{@h2{Benjamin Chung}}}}
 }}
